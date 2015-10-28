@@ -9,6 +9,8 @@ var Review = Parse.Object.extend('Review');
 
 	$('#stars').raty({path:'http://students.washington.edu/ydingles/info343/crud/lib/images'});
 
+
+// function to set data
 	$('form').submit(function() {
 
 	// Create a new instance of your Music class 
@@ -17,16 +19,8 @@ var Review = Parse.Object.extend('Review');
 
 	// Create a new instance of your Music class 
 	var newReview = new Review();
-
-	// Set a property 'star' equal to user star
-	// newReview.set('star', $('#star').raty(
-	// 	{	number: function() {
-	// 		return $(this).attr('data-number');
-	// 		}
-	// 	}));
-
-	newReview.set('star', $('#star').raty('score'));
-
+	//	Set a property 'stars' equal to user stars
+	newReview.set('stars', $('#stars').raty('score'));
 	// Set a property 'title' equal to a user title
 	newReview.set('title', $('#title').val()); 
 	// Set a property 'name' equal to the user name
@@ -37,13 +31,76 @@ var Review = Parse.Object.extend('Review');
 	newReview.save();
 
 	// clear the form
-	$('#star').raty({score:0});
+	$('#stars').raty({path:'http://students.washington.edu/ydingles/info343/crud/lib/images'});
 	$('#title').val('');
 	$('#name').val('');
 	$('#reviewtext').val('');
 
 	return false // prevents a new page from loading
 });
+
+//var starnumber = $('#stars').raty('score'));
+
+// function to run a query
+	var getData = function() {
+		var query = new Parse.Query(Review);
+		query.notEqualTo('stars', null);
+//		query.notEqualTo('title','');
+//		query.notEqualTo('name','');
+		query.notEqualTo('reviewtext','');
+		query.find({
+			success:function(results) {
+				buildList(results)
+			}
+		})
+
+	}
+
+// function to build list
+	var buildList = function(data) {
+		$('ol').empty();
+
+		data.forEach(function(d) {
+			addItem(d);
+		})
+	}
+
+// function to take item and add to screen
+	var addItem = function(item) {
+		var stars = item.get('stars');
+		var title = item.get('title');
+		var name = item.get('name');
+		var reviewtext = item.get('reviewtext');
+	
+		var div = $('<div id="reviewstar">' + $('#reviewstar').raty({path:'http://students.washington.edu/ydingles/info343/crud/lib/images', readOnly: true, score: stars}) + '</div>');
+		
+		//var reviewstar = $('#reviewstar').raty({path:'http://students.washington.edu/ydingles/info343/crud/lib/images', readOnly: true, score: stars})
+		//var li = $('<li>' + '<div id="reviewstar">' + $('#reviewstar').raty({path:'http://students.washington.edu/ydingles/info343/crud/lib/images'}) + '</div>' + title + name + reviewtext + '</li>');
+		//var div = $('#reviewstar').raty({path:'http://students.washington.edu/ydingles/info343/crud/lib/images', readOnly:true, score: stars})
+		
+		//var reviewstar = $('#reviewstar').raty({path:'http://students.washington.edu/ydingles/info343/crud/lib/images', readOnly: true, score: stars})
+		
+		var li = $('<li>' +  title + " " + name + " " + reviewtext + '</li>')
+		
+		//var li = $('<li>' + "<div id=starsgo>" + "</div>" + title + '</li>')
+		//$('#starsgo').raty({path:'http://students.washington.edu/ydingles/info343/crud/lib/images', readOnly: true, score: stars});
+
+		var button = $('<button class="btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>')
+
+		button.click(function() {
+			item.destroy({
+				success:getData
+		})
+	})
+
+		li.prepend(div);
+		li.append(button);
+		$('ol').append(li);
+
+	}
+
+getData();
+
 
 
 })
