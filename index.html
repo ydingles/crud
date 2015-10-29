@@ -13,25 +13,28 @@
         <!-- Link main.css file-->
         <link type="text/css" rel="stylesheet" href="css/main.css">
 
+        <script type="text/javascript" src="js/review.js"></script>
+
         <!-- raty libary, raty css-->
         <script type="text/javascript" src="lib/jquery.raty.js"></script>
         <link type="text/css" rel="stylesheet" href="lib/jquery.raty.css">
-    
-
-
     </head>
 
     <body>
 
         <div class="container" id="header">
-                <div class="col-sm-12">
+            <div class="col-sm-12">
 
-                    <h1>What do you really think about "The Boy Who Lived"?</h1>
+                <h1>What do you really think about "The Boy Who Lived"?</h1>
 
-                </div>
+                <p>Harry Potter is the much beloved main character in the Harry Potter series. From the first book, he is found to be relatable and likeable. Through the course of the series he is faced with numerous challenges where the reader finds himself/herself cheering him on. However, there are quite a few scenes where he is a total jerk.
+                </p>
+
+                <p>This page is meant to explore those instances where <i>you</i> found Harry, to put it bluntly, sucked (or not). Share your thoughts and explore the thoughts of others on "The Boy Who Lived".
+                </p>
+
+            </div>
         </div>
-
-
 
         <div class="container">
             <div class="row">
@@ -40,31 +43,12 @@
                     <a href="https://en.wikipedia.org/wiki/Harry_Potter"><img src="img/hp.jpg" id="HP" alt="Harry Potter"></a>
                 </div>
 
-                <div class="col-sm-6">
-                    <!--Description-->
-                    <p id="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                <div class="col-sm-6" id="reviewbody">
 
-                </div>
-            </div>
-        </div>
+                    <h2>Write your thoughts here!</h2>
 
-
-        <div class="container" id="reviewbody">
-            <div class="col-sm-12">
-
-                <h2>Write your thoughts here!</h2>
-
-
-
-                <form>
+                    <form>
                     <div class="form-group" id="stars">
-                        
                     </div>
 
                     <div class="form-group">
@@ -81,17 +65,17 @@
                     </div>
             
                     <button type="submit" class="btn btn-primary">Add Your Review</button>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+         </div>
 
         <div class="container" id="displayReviews">
             <div class="col-sm-12">
                 <h2>What other people think:</h2>
+                 <ul id="list"></ul>
 
-                <ol id="list">
-
-                </ol>
+                <!--<div id="listreviews"></div></div>-->
             </div>
         </div>
 
@@ -102,10 +86,5 @@
             </div>
         </div>
 
-
-
-
     </body>
-
-        <script type="text/javascript" src="js/review.js"></script>
-    </html>
+</html>
